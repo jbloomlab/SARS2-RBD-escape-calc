@@ -1,0 +1,6 @@
+[submodule "Cao_data/SARS-CoV-2-reinfection-DMS"]
+	path = Cao_data/SARS-CoV-2-reinfection-DMS
+	url = https://github.com/jianfcpku/SARS-CoV-2-reinfection-DMS
+[submodule "Cao_data/convergent_RBD_evolution"]
+	path = Cao_data/convergent_RBD_evolution
+	url = https://github.com/jianfcpku/convergent_RBD_evolution

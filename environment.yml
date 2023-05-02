@@ -10,11 +10,11 @@ dependencies:
   - jupyterlab
   - nbstripout
   - openpyxl
-  - ruamel.yaml=0.17
   - pandas=2.0
   - pdoc
   - pip
   - python=3.10
+  - snakemake=7.25
   - xlrd
   - pip:
     - altair==5.0.0rc2
