@@ -1,0 +1,21 @@
+name: SARS2-RBD-escape-calc
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+
+dependencies:
+  - biopython=1.81
+  - git-lfs
+  - jupyterlab
+  - nbstripout
+  - openpyxl
+  - ruamel.yaml=0.17
+  - pandas=2.0
+  - pdoc
+  - pip
+  - python=3.10
+  - xlrd
+  - pip:
+    - altair==5.0.0rc2
+    - dmslogo==0.6.3
