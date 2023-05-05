@@ -5,7 +5,7 @@ The data from Yunlong Cao's group is in the following submodules:
 
   - Their 2022 data from [Imprinted SARS-CoV-2 humoral immunity induces convergent Omicron RBD evolution](https://www.nature.com/articles/s41586-022-05644-7) from [this repo](https://github.com/jianfcpku/convergent_RBD_evolution) are in the submodule [./Cao_data/convergent_RBD_evolution](Cao_data/convergent_RBD_evolution)
 
-  - Their 2023 data on antibodies from re-infections in [this repo](https://github.com/jianfcpku/SARS-CoV-2-reinfection-DMS) are in the submodule [./Cao_data/SARS-CoV-2-reinfection-DMS](Cao_data/SARS-CoV-2-reinfection-DMS)
+  - Their 2023 data on antibodies from [Repeated Omicron infection alleviates SARS-CoV-2 immune imprinting (2023)](https://www.biorxiv.org/content/10.1101/2023.05.01.538516v2) in [this repo](https://github.com/jianfcpku/SARS-CoV-2-reinfection-DMS) are in the submodule [./Cao_data/SARS-CoV-2-reinfection-DMS](Cao_data/SARS-CoV-2-reinfection-DMS)
 
 
 Yunlong described the second dataset as follows via e-mail:
