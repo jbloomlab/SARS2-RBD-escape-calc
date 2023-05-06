@@ -4,7 +4,18 @@ sites:
   end: 531
 
 # initial mutation escape strength
-mutation_escape_strength: 2.0
+init_mutation_escape_strength: 2.0
 
-# weight by negative log IC50
-weight_by_neg_log_IC50: true
+# initial value of weight by negative log IC50
+init_weight_by_neg_log_IC50: true
+
+# initial value of study
+init_study: any
+
+# options for study, matching name used in data to display name
+studies:
+  repeated_2023: Yisimayi et al, 2023, bioRxiv
+  imprinted_2022: Cao et al, 2022, Nature
+
+# initial value of virus
+init_virus: XBB
