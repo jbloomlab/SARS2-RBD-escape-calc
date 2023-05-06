@@ -1,0 +1,10 @@
+# sites to show in plot
+sites:
+  start: 331
+  end: 531
+
+# initial mutation escape strength
+mutation_escape_strength: 2.0
+
+# weight by negative log IC50
+weight_by_neg_log_IC50: true
