@@ -12,6 +12,9 @@ init_weight_by_neg_log_IC50: true
 # initial value of study
 init_study: any
 
+# initial value of binds
+init_binds: any
+
 # options for study, matching name used in data to display name
 studies:
   repeated_2023: Yisimayi et al, 2023, bioRxiv
