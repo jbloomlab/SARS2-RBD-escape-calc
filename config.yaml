@@ -29,3 +29,9 @@ studies:
 
 # initial value of virus
 init_virus: XBB
+
+# initial value of antibody sources
+init_sources:
+  include_exclude: exclude  # does `sources` list sources to include or exclude?
+  sources:
+    - SARS convalescents
