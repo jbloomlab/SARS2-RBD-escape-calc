@@ -1,3 +1,10 @@
+# When processing data, drop antibodies with more than this many sites
+# of escape that is with more than `max_sig_sites` sites with escape
+# of at least `sig_escape_threshold`.
+filter_antibodies:
+  sig_escape_threshold: 0.1
+  max_sig_sites: 40
+
 # sites to show in plot
 sites:
   start: 331
