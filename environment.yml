@@ -5,6 +5,7 @@ channels:
   - defaults
 
 dependencies:
+  - altair=5.0.0
   - biopython=1.81
   - git-lfs
   - jupyterlab
@@ -13,10 +14,9 @@ dependencies:
   - openpyxl
   - pandas=2.0
   - pdoc
-  - pip
   - python=3.10
   - snakemake=7.25
+  - vegafusion=1.2.4
+  - vegafusion-python-embed=1.2.4
+  - vegafusion-jupyter=1.2.4
   - xlrd
-  - pip:
-    - altair==5.0.0rc2
-    - dmslogo==0.6.3
