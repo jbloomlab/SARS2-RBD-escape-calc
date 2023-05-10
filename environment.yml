@@ -19,4 +19,5 @@ dependencies:
   - vegafusion=1.2.4
   - vegafusion-python-embed=1.2.4
   - vegafusion-jupyter=1.2.4
+  - vl-convert-python=0.9.0
   - xlrd
