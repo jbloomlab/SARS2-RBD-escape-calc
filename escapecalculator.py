@@ -40,6 +40,8 @@ class EscapeCalculator:
         Path or URL of CSV containing the antibody binding.
     antibody_sources : str
         Path or URL of CSV containing the antibody sources.
+    antibody_reweighting : str
+        Path or URL of CSV containing the antibody reweightings.
     config : str
         Path or URL of YAML file containing initial settings.
     mut_escape_strength : None or float
@@ -54,6 +56,8 @@ class EscapeCalculator:
         If not `None`, override default `init_virus` in `config`.
     sources : None or dict
         If not `None`, override default `init_sources` in `config`.
+    reweight : None or bool
+        If not `None`, override default `init_reweight` in `config`.
 
     Example
     -------
@@ -67,11 +71,11 @@ class EscapeCalculator:
     >>> sites_of_interest = [403, 440, 484, 498, 505, 510]
     >>> calc.escape_per_site([440, 505]).query("site in @sites_of_interest").round(3)
          site  original_escape  retained_escape
-    69    403            0.117            0.028
-    101   440            0.183            0.017
-    143   484            0.050            0.038
-    156   498            0.190            0.086
-    163   505            0.237            0.021
+    69    403            0.095            0.028
+    101   440            0.151            0.017
+    143   484            0.045            0.035
+    156   498            0.157            0.071
+    163   505            0.188            0.020
     167   510            0.001            0.001
 
     Calculate overall neutralization retained after no mutations or some mutations:
@@ -79,7 +83,7 @@ class EscapeCalculator:
     >>> calc.binding_retained([])
     1.0
     >>> calc.binding_retained([440, 505]).round(3)
-    0.544
+    0.591
 
     Now repeat tests with some non-default options:
 
@@ -110,6 +114,7 @@ class EscapeCalculator:
         antibody_ic50s="https://raw.githubusercontent.com/jbloomlab/SARS2-RBD-escape-calc/main/results/antibody_IC50s.csv",
         antibody_binding="https://raw.githubusercontent.com/jbloomlab/SARS2-RBD-escape-calc/main/results/antibody_binding.csv",
         antibody_sources="https://raw.githubusercontent.com/jbloomlab/SARS2-RBD-escape-calc/main/results/antibody_sources.csv",
+        antibody_reweighting="https://raw.githubusercontent.com/jbloomlab/SARS2-RBD-escape-calc/main/results/antibody_reweighting.csv",
         config="https://raw.githubusercontent.com/jbloomlab/SARS2-RBD-escape-calc/main/config.yaml",
         *,
         mut_escape_strength=None,
@@ -118,6 +123,7 @@ class EscapeCalculator:
         binds=None,
         virus=None,
         sources=None,
+        reweight=None,
     ):
         """See main class docstring."""
         # read input data 
@@ -153,11 +159,17 @@ class EscapeCalculator:
         )
         assert antibodies == set(self.antibody_sources["antibody"])
 
+        self.antibody_reweighting = pd.read_csv(antibody_reweighting)
+        assert set(self.antibody_reweighting.columns) == {"antibody", "reweight"}
+        assert antibodies.issuperset(self.antibody_reweighting["antibody"])
+
         self.data = (
             self.escape
             .merge(self.antibody_ic50s, on="antibody")
             .merge(self.antibody_binding, on="antibody")
             .merge(self.antibody_sources, on="antibody")
+            .merge(self.antibody_reweighting, on="antibody", how="left")
+            .assign(reweight=lambda x: x["reweight"].fillna(1))
         )
         assert self.data.notnull().all().all()
 
@@ -218,6 +230,12 @@ class EscapeCalculator:
         else:
             raise ValueError(f"invalid {include_exclude=} in {sources=}")
 
+        if reweight is None:
+            self.reweight = config["init_reweight"]
+        else:
+            self.reweight = reweight
+        assert isinstance(self.reweight, bool), self.reweight
+
         # filter data
         if self.study != "any":
             assert self.study in set(self.data["study"])
@@ -237,7 +255,7 @@ class EscapeCalculator:
         assert self.sources.issubset(self.data["source"])
         self.data = self.data.query("source in @self.sources").drop(columns="source")
 
-        assert set(self.data.columns) == {"antibody", "site", "escape", "IC50"}
+        assert set(self.data.columns) == {"antibody", "site", "escape", "IC50", "reweight"}
         assert len(self.data) == len(self.data.drop_duplicates())
         self.data = (
             self.data
@@ -276,13 +294,16 @@ class EscapeCalculator:
                 mutated=lambda x: x['site'].isin(mutated_sites).astype(int),
                 site_bind_retain=lambda x: 1 - x["escape"] * x["mutated"],
             )
-            .groupby(["antibody", "neg_log_ic50"], as_index=False)
+            .groupby(["antibody", "neg_log_ic50", "reweight"], as_index=False)
             .aggregate(antibody_bind_retain=pd.NamedAgg("site_bind_retain", "prod"))
             .assign(
                 antibody_bind_retain=lambda x: x["antibody_bind_retain"].pow(
                     self.mut_escape_strength
                 ),
-                weight=lambda x: x["neg_log_ic50"] if self.weight_by_neg_log_ic50 else 1,
+                weight=lambda x: (
+                    (x["neg_log_ic50"] if self.weight_by_neg_log_ic50 else 1)
+                    * (x["reweight"] if self.reweight else 1)
+                ),
             )
             [["antibody", "antibody_bind_retain", "weight"]]
             .merge(self.data[["antibody", "site", "escape"]])
@@ -321,13 +342,16 @@ class EscapeCalculator:
                 mutated=lambda x: x["site"].isin(mutated_sites).astype(int),
                 site_bind_retain=lambda x: 1 - x["escape"] * x["mutated"],
             )
-            .groupby(["antibody", "neg_log_ic50"], as_index=False)
+            .groupby(["antibody", "neg_log_ic50", "reweight"], as_index=False)
             .aggregate(antibody_bind_retain=pd.NamedAgg("site_bind_retain", "prod"))
             .assign(
                 antibody_bind_retain=lambda x: x["antibody_bind_retain"].pow(
                     self.mut_escape_strength
                 ),
-                weight=lambda x: x["neg_log_ic50"] if self.weight_by_neg_log_ic50 else 1,
+                weight=lambda x: (
+                    (x["neg_log_ic50"] if self.weight_by_neg_log_ic50 else 1)
+                    * (x["reweight"] if self.reweight else 1)
+                ),
                 weighted_antibody_bind_retain=lambda x: (
                     x["antibody_bind_retain"] * x["weight"]
                 ),
