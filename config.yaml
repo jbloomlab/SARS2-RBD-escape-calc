@@ -1,9 +1,31 @@
+# -------------------------------------------
+# Configuration for processing data
+# -------------------------------------------
+
 # When processing data, drop antibodies with more than this many sites
 # of escape that is with more than `max_sig_sites` sites with escape
 # of at least `sig_escape_threshold`.
 filter_antibodies:
   sig_escape_threshold: 0.1
   max_sig_sites: 40
+
+# When processing data, we provide antibody re-weightings for some
+# groupings. These are designed to account for the instance when
+# the antibodies isolated are not representative of their actual frequencies.
+antibody_reweighting:
+  repeated_2023:
+    # these are the re-weightings used in https://doi.org/10.1101/2023.05.01.538516
+    #  89% cross-reactive mAbs for BA.5/BF.7 BTI cohorts and 51% for reinfection
+    # cohorts, as determined by unbiased characterization of mAbs using ELISA
+    cross_reactive_weights:
+      BA.5 convalescents: 0.89
+      BF.7 convalescents: 0.89
+      BA.1 convalescents reinfection: 0.51
+      BA.2 convalescents reinfection: 0.51
+
+# -------------------------------------------
+# Configuration for escape calculator
+# -------------------------------------------
 
 # sites to show in plot
 sites:
