@@ -17,10 +17,10 @@ jupyter nbconvert \
     --ExecutePreprocessor.timeout=-1
 
 # build docs for command-line calculator
+mkdir -p docs
 pdoc escapecalculator.py -o docs/ --no-search
 
 # run `format_altair_html.py`
-mkdir -p docs
 python format_altair_html.py \
     --chart results/escape_chart.html \
     --markdown data_for_plot_formatting/legend.md \

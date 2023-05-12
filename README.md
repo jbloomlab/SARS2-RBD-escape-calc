@@ -1,27 +1,56 @@
 # Escape calculator for the SARS-CoV-2 RBD
 
-## Data from Yunlong Cao et al
-The data from Yunlong Cao's group is in the following submodules:
+This repository implements the latest version of the escape calculator originally described [Greaney, Starr, & Bloom, Virus Evolution, 8:veac021 (2022)](https://doi.org/10.1093/ve/veac021).
 
-  - Their 2022 data from [Imprinted SARS-CoV-2 humoral immunity induces convergent Omicron RBD evolution](https://www.nature.com/articles/s41586-022-05644-7) from [this repo](https://github.com/jianfcpku/convergent_RBD_evolution) are in the submodule [./Cao_data/convergent_RBD_evolution](Cao_data/convergent_RBD_evolution)
+The interactive escape calculator itself is available at [https://jbloomlab.github.io/SARS2-RBD-escape-calc/](https://jbloomlab.github.io/SARS2-RBD-escape-calc/) and that page also contains a detailed explanation of how the calculator works as well as the papers from Yunlong Cao's group from which the deep mutational scanning data are derived.
+So go to that website to understand and use the calculator.
 
-  - Their 2023 data on antibodies from [Repeated Omicron infection alleviates SARS-CoV-2 immune imprinting (2023)](https://www.biorxiv.org/content/10.1101/2023.05.01.538516v2) in [this repo](https://github.com/jianfcpku/SARS-CoV-2-reinfection-DMS) are in the submodule [./Cao_data/SARS-CoV-2-reinfection-DMS](Cao_data/SARS-CoV-2-reinfection-DMS)
+There is also a Python module for command-line implementation of the calculator, as described [here](https://jbloomlab.github.io/SARS2-RBD-escape-calc/escapecalculator.html).
 
+## Contents of this repo
 
-Yunlong described the second dataset as follows via e-mail:
+- [./Cao_data/](Cao_data): the input data used by calculator, in the form of submodules of the GitHub repos from their papers.
 
-    I am excited to share a new dataset containing the DMS profiles of 1,350 SARS-CoV-2 RBD-targeting mAbs using a DMS library based on the BA.5 RBD. These mAbs primarily originate from BA.5 and BF.7 breakthrough infection convalescents, as well as BA.5/BF.7 reinfection convalescents who previously experienced BA.1 or BA.2 breakthrough infections. Note a high proportion of these mAbs are Omicron-specific.
+- [config.yaml](config.yaml): configuration for processing the data and creating the calculator.
 
-    Following an approach similar to that in our prior work, we performed mutation calculations based on these profiles and their neutralizing activities against XBB.1.5. I anticipate that our manuscript will be available on bioRxiv within the next one or two days.
+- [environment.yml](environment.yml): `conda` environment for processing the data and building the calculator.
 
-    We have uploaded most of the data and code to our GitHub repository (https://github.com/jianfcpku/SARS-CoV-2-reinfection-DMS). While the detailed README file is still in progress, let me briefly introduce the main results here. The repository contains three .csv files, which include the integrated DMS profiles:
+- [process_data.ipynb](process_data.ipynb): Jupyter notebook that processes the deep mutational scanning data to prep it for the calculator. Those processed data are placed in [./results/](results).
 
-    > "antibody_dms_merge.csv.gz" presents the raw scores from the epistasis model, normally filtered by RBD expression.
+- [plot_calculator.ipynb](plot_calculator.ipynb): Jupyter notebook that uses the processed data to build the actual interactive calculator using Altair.
 
-    > "antibody_dms_merge_clean.csv.gz" contains the most significant mutations derived from "antibody_dms_merge.csv.gz", filtered according to median scores, as in our previous results.
+- [format_altair_html.py](format_altair_html.py): Python script that uses the configuration in [./data_for_plot_formatting/](data_for_plot_formatting) to created a formatted version of the escape calculator (adding legend and Google analytics tag) that is placed at [./docs/index.html](docs/index.html).
 
-    > "calculation/antibody_dms_merge_no_filter_clean.csv.gz" features raw scores without any expression filter, as we will apply a weight on expression when calculating mutation preferences. To minimize noise, a median-based filter is also used ("_clean"). I believe that employing this file retains mutations as many as possible.
+- [escapecalculator.py](escapecalculator.py): the Python module for command-line non-interactive escape calculations.
 
-    "antibody_info.csv" contains the neutralizing activities (IC50 in ug/mL) and the cross reactivity determined by ELISA. Notably, the dataset specifically enriches for Omicron-specific antibodies, potentially introducing bias when estimating mutation preferences. I highly recommend a weighting strategy that assigns higher weights to cross-reactive mAbs, resulting in 89% cross-reactive mAbs for BA.5/BF.7 BTI cohorts and 51% for reinfection cohorts. These ratios are determined by unbiased characterization of mAbs using ELISA. This approach is detailed in the code found in "calculation/calculate_preference.ipynb".
+- [run_pipeline.bash](run_pipeline.bash): Bash script that runs all steps.
 
-    I hope you maintain your interest in this subject as well as sharing these data though your calculator, and that these data will prove helpful to you and others who are also intrigued.
+## Building the calculator
+
+First, build and activate the `conda` environment in [environment.yml](environment.yml).
+
+Then process the data by running the Jupyter notebook [process_data.ipynb](process_data.ipynb).
+
+Next, build the escape calculator by running the Jupyter notebook [plot_calculator.ipynb](plot_calculator.ipynb).
+
+Build the documentation for the Python module by running:
+
+    pdoc escapecalculator.py -o docs/ --no-search
+
+This must be done before the next step to avoid overwriting the index in [./docs/](docs).
+
+Then format the escape calculator by running:
+
+    python format_altair_html.py \
+        --chart results/escape_chart.html \
+        --markdown data_for_plot_formatting/legend.md \
+        --site https://jbloomlab.github.io/SARS2-RBD-escape-calc \
+        --title "SARS-CoV-2 RBD antibody escape calculator" \
+        --description "Calculate antibody escape by mutations to SARS-CoV-2 RBD" \
+        --google_analytics_tag data_for_plot_formatting/google_analytics_tag.html \
+        --output docs/index.html
+
+You can do all of these steps automatically by just running the Bash script [run_pipeline.bash](run_pipeline.bash).
+
+## Old version of calculator
+This repo replaces that for the the original version of the calculator at [https://github.com/jbloomlab//SARS2_RBD_Ab_escape_maps](https://github.com/jbloomlab//SARS2_RBD_Ab_escape_maps).
