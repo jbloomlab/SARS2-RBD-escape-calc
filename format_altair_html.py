@@ -6,6 +6,7 @@ You can either use function in module or run as command-line tool.
 
 
 import argparse
+import textwrap
 
 from bs4 import BeautifulSoup as bs
 
@@ -43,7 +44,13 @@ def annotate_altair_chart(
 
     # Get the annotation and convert it from markdown to HTML
     with open(annotation_md, "r") as markdow_file:
-        annotation = bs(markdown.markdown(markdow_file.read()), "html.parser")
+        annotation = bs(
+            markdown.markdown(
+                markdow_file.read(),
+                extensions=["mdx_math"],
+            ),
+            "html.parser"
+        )
 
     # Add the annotation to the bottom of the page
     markdown_container = page.new_tag("div", attrs={"id": "markdown"})
@@ -90,6 +97,31 @@ def annotate_altair_chart(
     )
 
     html_str = page.prettify()
+
+    # enable math to be added: https://stackoverflow.com/a/54373640
+    mathjax_script = textwrap.dedent(
+        r"""
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML-full">
+        </script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                tex2jax: {
+                    inlineMath: [["$", "$"], ["\\\\(", "\\\\)"]],
+                    displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+                    processEscapes: true
+                },
+                config: ["MMLorHTML.js"],
+                jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+                extensions: ["MathMenu.js", "MathZoom.js"]
+            });
+        </script>
+        """
+    )
+    if html_str.count("</head>\n") == 1:
+        html_str = html_str.replace("</head>\n", "</head>\n" + mathjax_script)
+    else:
+            raise ValueError("failed to find exactly one tag end")
 
     if google_analytics_tag:
         with open(google_analytics_tag) as f:

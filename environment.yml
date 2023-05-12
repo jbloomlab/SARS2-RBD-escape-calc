@@ -9,12 +9,13 @@ dependencies:
   - biopython=1.81
   - git-lfs
   - jupyterlab
-  - markdown
+  - markdown=3.4.3
   - nbstripout
   - openpyxl
   - pandas=2.0
   - pdoc
   - python=3.10
+  - python-markdown-math=0.8
   - snakemake=7.25
   - vegafusion=1.2.4
   - vegafusion-python-embed=1.2.4
