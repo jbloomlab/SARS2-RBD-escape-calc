@@ -16,6 +16,9 @@ jupyter nbconvert \
     --execute plot_calculator.ipynb \
     --ExecutePreprocessor.timeout=-1
 
+# build docs for command-line calculator
+pdoc escapecalculator.py -o docs/ --no-search
+
 # run `format_altair_html.py`
 mkdir -p docs
 python format_altair_html.py \
@@ -26,6 +29,3 @@ python format_altair_html.py \
     --description "Calculate antibody escape by mutations to SARS-CoV-2 RBD" \
     --google_analytics_tag data_for_plot_formatting/google_analytics_tag.html \
     --output docs/index.html
-
-# build docs for command-line calculator
-pdoc escapecalculator.py -o docs/ --no-search
