@@ -35,13 +35,29 @@ The deep mutational scanning data used by the calculator comes from the followin
  - [Cao et al, Nature, 614:521-529 (2023)](https://www.nature.com/articles/s41586-022-05644-7)
  - [Yisimayi et al, bioRxiv, DOI 10.1101/2023.05.01.538516 (2023)](https://doi.org/10.1101/2023.05.01.538516)
 
-We especially acknowledge [Fanchong Jian](https://twitter.com/jianfcpku) (an author on the above papers from Yunlong Cao's group), who created the GitHub repos from which the deep mutational scanning data were extracted.
+Special thanks to [Fanchong Jian](https://twitter.com/jianfcpku) (an author on the above papers from Yunlong Cao's group), who created the GitHub repos from which the deep mutational scanning data were extracted.
 
 The interactive calculator is created using [Altair](https://altair-viz.github.io/):
 
  - [VanderPlas et al, JOSS, 3:1057](https://joss.theoj.org/papers/10.21105/joss.01057)
 
-#### Detailed explanation of how the calculator works
+#### The calculator shows escape, **not** mutational tolerance
+This calculator shows the antigenic effects of mutations to the RBD.
+It does **not** incorporate information about the functional effects of those mutations, such as how they affect ACE2 affinity.
+In practice, we know that the RBD mutations that actually fix during SARS-CoV-2 evolution are ones that cause antibody escape while also not excessively impairing ACE2 affinity.
+Therefore, the calculator is designed to answer this question: *What is the antigenic effect of mutating a specific site?*
+
+If you instead want to try to *predict* which sites are likely to change during natural SARS-CoV-2 evolution, you will want to integrate the calculator's estimates of the antigenic effects of mutations with other data on how those mutations affect other RBD properties that contribute to viral fitness.
+Currently the best data on those other properties are available at the following sites:
+
+ - [https://jbloomlab.github.io/SARS-CoV-2-RBD_DMS_Omicron/RBD-heatmaps/](https://jbloomlab.github.io/SARS-CoV-2-RBD_DMS_Omicron/RBD-heatmaps/), which shows mutational effects on RBD ACE2 affinity and expression as measured by yeast-display deep mutational scanning in [Starr et al, PLoS Pathogens, 2022, 18:e1010951](https://doi.org/10.1371/journal.ppat.1010951)
+ - [https://jbloomlab.github.io/SARS2-mut-fitness/S.html](https://jbloomlab.github.io/SARS2-mut-fitness/S.html), which shows the estimated fitness effects of mutations to the spike as estimated in [Bloom & Neher, bioRxiv, 2023, DOI 10.1101/2023.01.30.526314](https://doi.org/10.1101/2023.01.30.526314)
+
+In addition, the amino-acid mutations that occur in natural viral evolution are predominantly ones accessible by single nucleotide mutations, especially via the [more common types of nucleotide changes](https://doi.org/10.1093/molbev/msad085).
+
+Note that the papers by Yunlong Cao's group already integrate these different types of data to make forecasts of likely future mutations, as for instance in [Yisimayi et al, bioRxiv, DOI 10.1101/2023.05.01.538516 (2023)](https://doi.org/10.1101/2023.05.01.538516).
+
+### Detailed explanation of how the calculator works
 For each antibody $a$, let $x_{a,r}$ be the measurement of how much mutating site $r$ escapes the antibody.
 For all antibodies, these site escape measurements are normalized so that the maximum escape at any site is 1; eg, $\max_r x_{a,r} = 1$.
 In the line plot, the gray lines (or the blue lines when there are no mutations) show the mean of $x_{a,r}$ overall antibodies; that is, they show $\frac{\sum_a x_{a,r}}{A}$ where $A$ is the total number of antibodies.
