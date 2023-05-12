@@ -13,7 +13,7 @@ dependencies:
   - nbstripout
   - openpyxl
   - pandas=2.0
-  - pdoc
+  - pdoc=13.1.1
   - python=3.10
   - python-markdown-math=0.8
   - snakemake=7.25

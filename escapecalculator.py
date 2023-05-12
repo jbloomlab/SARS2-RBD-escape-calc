@@ -1,10 +1,71 @@
-"""Calculate escape after some mutations.
+"""Calculate escape after some mutations to the SARS-CoV-2 RBD.
 
-See https://github.com/jbloomlab/SARS2-RBD-escape-calc for details.
+This Python module, is available at
+https://github.com/jbloomlab/SARS2-RBD-escape-calc/blob/main/escapecalculator.py
 
-The module defines :class:`EscapeCalculator` which does the calculation.
+It provides a programmatic method to perform the escape calculations implemented in
+the interactive calculator implemented at
+https://jbloomlab.github.io/SARS2-RBD-escape-calc
 
-Written by Jesse Bloom.
+By default, it downloads the same data used by the interactive calculator and uses the
+same initial parameter settings as the interactive calculator. You can override these
+defaults by using different arguments when initializing the :class:`EscapeCalculator`.
+
+See https://github.com/jbloomlab/SARS2-RBD-escape-calc for all code and data. The
+calculator is written by Jesse Bloom, and the citation is
+`this paper <https://doi.org/10.1093/ve/veac021>`_.
+
+To use the calculator, open a Python session, import this module, and initialize an
+:class:`EscapeCalculator`:
+
+>>> calc = EscapeCalculator()
+
+With no mutations, there is no escape (all neutralization retained):
+
+>>> calc.binding_retained([])
+1.0
+
+But if you mutate some key antigenic sites, there will be a dramatic reduction in
+neutralization retained:
+
+>>> calc.binding_retained([440, 505]).round(3)
+0.591
+
+If you have a whole set of sequences and have tabulated which sites are mutated,
+you can apply the calculator in bulk to the data frame.
+First, create such a data frame of sequences:
+
+>>> import pandas as pd
+>>> seqs = pd.DataFrame.from_records(
+...     [("seq1", []), ("seq2", [498]), ("seq3", [440]), ("seq4", [440, 505])],
+...     columns=["name", "mutated sites"],
+... )
+>>> seqs
+   name mutated sites
+0  seq1            []
+1  seq2         [498]
+2  seq3         [440]
+3  seq4    [440, 505]
+
+Now apply the calculator:
+
+>>> seqs["neutralization retained"] = seqs["mutated sites"].map(calc.binding_retained)
+>>> seqs.round(3)
+   name mutated sites  neutralization retained
+0  seq1            []                    1.000
+1  seq2         [498]                    0.791
+2  seq3         [440]                    0.809
+3  seq4    [440, 505]                    0.591
+
+You can also create new calculators that compute escape relative to different viruses,
+for instance BA.2:
+
+>>> calc_ba2 = EscapeCalculator(virus="BA.2")
+
+Now the escape will be different because different antibodies neutralize that virus:
+
+>>> calc_ba2.binding_retained([440, 505]).round(3)
+0.805
 
 """
 
