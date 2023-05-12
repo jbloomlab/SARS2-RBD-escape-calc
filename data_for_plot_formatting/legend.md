@@ -71,7 +71,7 @@ The blue bar at lower left in the chart shows the total weighted fraction of all
 The computer code and data used to create the calculator are at [https://github.com/jbloomlab/SARS2-RBD-escape-calc/](https://github.com/jbloomlab/SARS2-RBD-escape-calc/)
 
 That repository also includes a Python module that implements a version of the calculator that can be run in batch over lists of RBD mutations.
-The module implementing that calculator is [here](https://github.com/jbloomlab/SARS2-RBD-escape-calc/blob/main/escapecalculator.py), and documentation for using it is at **???**
+The module implementing that calculator is [here](https://github.com/jbloomlab/SARS2-RBD-escape-calc/blob/main/escapecalculator.py), and documentation for using it is at [https://jbloomlab.github.io/SARS2-RBD-escape-calc/escapecalculator.html](https://jbloomlab.github.io/SARS2-RBD-escape-calc/escapecalculator.html).
 
 #### Original version of calculator
 The original version of the antibody-escape calculator was implemented in the code available at [https://github.com/jbloomlab/SARS2_RBD_Ab_escape_maps](https://github.com/jbloomlab/SARS2_RBD_Ab_escape_maps)
