@@ -9,6 +9,10 @@ filter_antibodies:
   sig_escape_threshold: 0.1
   max_sig_sites: 40
 
+# When processing data, only keep viruses with IC50s measured against at
+# least this many antibodies
+virus_min_antibodies_w_ic50: 1000
+
 # When processing data, we provide antibody re-weightings for some
 # groupings. These are designed to account for the instance when
 # the antibodies isolated are not representative of their actual frequencies.
