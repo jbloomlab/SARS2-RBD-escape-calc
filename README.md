@@ -9,7 +9,7 @@ There is also a Python module for command-line implementation of the calculator,
 
 ## Contents of this repo
 
-- [./Cao_data/](Cao_data): the input data used by calculator, in the form of submodules of the GitHub repos from their papers.
+- [./Cao_data/](Cao_data): the input data used by calculator, in the form of submodules of the GitHub repos from their papers. Also the spreadsheet [Cao_data/all-repo-duplicates.xlsx](Cao_data/all-repo-duplicates.xlsx) which defines some antibodies that are duplicated across repos with different names according to an analysis done by Jennifer Macke at LANL.
 
 - [config.yaml](config.yaml): configuration for processing the data and creating the calculator.
 
