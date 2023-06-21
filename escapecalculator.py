@@ -29,7 +29,7 @@ But if you mutate some key antigenic sites, there will be a dramatic reduction i
 neutralization retained:
 
 >>> calc.binding_retained([440, 505]).round(3)
-0.591
+0.545
 
 If you have a whole set of sequences and have tabulated which sites are mutated,
 you can apply the calculator in bulk to the data frame.
@@ -53,9 +53,9 @@ Now apply the calculator:
 >>> seqs.round(3)
    name mutated sites  neutralization retained
 0  seq1            []                    1.000
-1  seq2         [498]                    0.791
-2  seq3         [440]                    0.809
-3  seq4    [440, 505]                    0.591
+1  seq2         [498]                    0.769
+2  seq3         [440]                    0.790
+3  seq4    [440, 505]                    0.545
 
 You can also create new calculators that compute escape relative to different viruses,
 for instance BA.2:
@@ -65,7 +65,7 @@ for instance BA.2:
 Now the escape will be different because different antibodies neutralize that virus:
 
 >>> calc_ba2.binding_retained([440, 505]).round(3)
-0.805
+0.786
 
 """
 
@@ -132,11 +132,11 @@ class EscapeCalculator:
     >>> sites_of_interest = [403, 440, 484, 498, 505, 510]
     >>> calc.escape_per_site([440, 505]).query("site in @sites_of_interest").round(3)
          site  original_escape  retained_escape
-    69    403            0.095            0.028
-    101   440            0.151            0.017
-    143   484            0.045            0.035
-    156   498            0.157            0.071
-    163   505            0.188            0.020
+    69    403            0.105            0.030
+    101   440            0.162            0.018
+    143   484            0.043            0.032
+    156   498            0.169            0.076
+    163   505            0.208            0.022
     167   510            0.001            0.001
 
     Calculate overall neutralization retained after no mutations or some mutations:
@@ -144,7 +144,7 @@ class EscapeCalculator:
     >>> calc.binding_retained([])
     1.0
     >>> calc.binding_retained([440, 505]).round(3)
-    0.591
+    0.545
 
     Now repeat tests with some non-default options:
 
@@ -161,13 +161,13 @@ class EscapeCalculator:
          site  original_escape  retained_escape
     62    403            0.006            0.006
     84    440            0.008            0.007
-    123   484            0.207            0.029
-    134   498            0.008            0.008
+    123   484            0.212            0.029
+    134   498            0.009            0.008
     141   505            0.002            0.002
     144   510            0.000            0.000
 
     >>> calc2.binding_retained([484]).round(3)
-    0.793
+    0.788
 
     """
     def __init__(self,

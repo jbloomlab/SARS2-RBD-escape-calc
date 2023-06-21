@@ -92,7 +92,7 @@ neutralization retained:</p>
 
 <div class="pdoc-code codehilite">
 <pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">calc</span><span class="o">.</span><span class="n">binding_retained</span><span class="p">([</span><span class="mi">440</span><span class="p">,</span> <span class="mi">505</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">0.591</span>
+<span class="go">0.545</span>
 </code></pre>
 </div>
 
@@ -122,9 +122,9 @@ First, create such a data frame of sequences:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">seqs</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">   name mutated sites  neutralization retained</span>
 <span class="go">0  seq1            []                    1.000</span>
-<span class="go">1  seq2         [498]                    0.791</span>
-<span class="go">2  seq3         [440]                    0.809</span>
-<span class="go">3  seq4    [440, 505]                    0.591</span>
+<span class="go">1  seq2         [498]                    0.769</span>
+<span class="go">2  seq3         [440]                    0.790</span>
+<span class="go">3  seq4    [440, 505]                    0.545</span>
 </code></pre>
 </div>
 
@@ -140,7 +140,7 @@ for instance BA.2:</p>
 
 <div class="pdoc-code codehilite">
 <pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">calc_ba2</span><span class="o">.</span><span class="n">binding_retained</span><span class="p">([</span><span class="mi">440</span><span class="p">,</span> <span class="mi">505</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">0.805</span>
+<span class="go">0.786</span>
 </code></pre>
 </div>
 </div>
@@ -180,7 +180,7 @@ for instance BA.2:</p>
 </span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a><span class="sd">neutralization retained:</span>
 </span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>
 </span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a><span class="sd">&gt;&gt;&gt; calc.binding_retained([440, 505]).round(3)</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="sd">0.591</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="sd">0.545</span>
 </span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>
 </span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a><span class="sd">If you have a whole set of sequences and have tabulated which sites are mutated,</span>
 </span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a><span class="sd">you can apply the calculator in bulk to the data frame.</span>
@@ -204,9 +204,9 @@ for instance BA.2:</p>
 </span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="sd">&gt;&gt;&gt; seqs.round(3)</span>
 </span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="sd">   name mutated sites  neutralization retained</span>
 </span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">0  seq1            []                    1.000</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">1  seq2         [498]                    0.791</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">2  seq3         [440]                    0.809</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="sd">3  seq4    [440, 505]                    0.591</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">1  seq2         [498]                    0.769</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">2  seq3         [440]                    0.790</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="sd">3  seq4    [440, 505]                    0.545</span>
 </span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>
 </span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="sd">You can also create new calculators that compute escape relative to different viruses,</span>
 </span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="sd">for instance BA.2:</span>
@@ -216,7 +216,7 @@ for instance BA.2:</p>
 </span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a><span class="sd">Now the escape will be different because different antibodies neutralize that virus:</span>
 </span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>
 </span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a><span class="sd">&gt;&gt;&gt; calc_ba2.binding_retained([440, 505]).round(3)</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="sd">0.805</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="sd">0.786</span>
 </span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>
 </span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>
@@ -283,11 +283,11 @@ for instance BA.2:</p>
 </span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a><span class="sd">    &gt;&gt;&gt; sites_of_interest = [403, 440, 484, 498, 505, 510]</span>
 </span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a><span class="sd">    &gt;&gt;&gt; calc.escape_per_site([440, 505]).query(&quot;site in @sites_of_interest&quot;).round(3)</span>
 </span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a><span class="sd">         site  original_escape  retained_escape</span>
-</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a><span class="sd">    69    403            0.095            0.028</span>
-</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a><span class="sd">    101   440            0.151            0.017</span>
-</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a><span class="sd">    143   484            0.045            0.035</span>
-</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a><span class="sd">    156   498            0.157            0.071</span>
-</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a><span class="sd">    163   505            0.188            0.020</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a><span class="sd">    69    403            0.105            0.030</span>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a><span class="sd">    101   440            0.162            0.018</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a><span class="sd">    143   484            0.043            0.032</span>
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a><span class="sd">    156   498            0.169            0.076</span>
+</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a><span class="sd">    163   505            0.208            0.022</span>
 </span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a><span class="sd">    167   510            0.001            0.001</span>
 </span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>
 </span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a><span class="sd">    Calculate overall neutralization retained after no mutations or some mutations:</span>
@@ -295,7 +295,7 @@ for instance BA.2:</p>
 </span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a><span class="sd">    &gt;&gt;&gt; calc.binding_retained([])</span>
 </span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a><span class="sd">    1.0</span>
 </span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a><span class="sd">    &gt;&gt;&gt; calc.binding_retained([440, 505]).round(3)</span>
-</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a><span class="sd">    0.591</span>
+</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a><span class="sd">    0.545</span>
 </span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a>
 </span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a><span class="sd">    Now repeat tests with some non-default options:</span>
 </span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a>
@@ -312,13 +312,13 @@ for instance BA.2:</p>
 </span><span id="L-161"><a href="#L-161"><span class="linenos">161</span></a><span class="sd">         site  original_escape  retained_escape</span>
 </span><span id="L-162"><a href="#L-162"><span class="linenos">162</span></a><span class="sd">    62    403            0.006            0.006</span>
 </span><span id="L-163"><a href="#L-163"><span class="linenos">163</span></a><span class="sd">    84    440            0.008            0.007</span>
-</span><span id="L-164"><a href="#L-164"><span class="linenos">164</span></a><span class="sd">    123   484            0.207            0.029</span>
-</span><span id="L-165"><a href="#L-165"><span class="linenos">165</span></a><span class="sd">    134   498            0.008            0.008</span>
+</span><span id="L-164"><a href="#L-164"><span class="linenos">164</span></a><span class="sd">    123   484            0.212            0.029</span>
+</span><span id="L-165"><a href="#L-165"><span class="linenos">165</span></a><span class="sd">    134   498            0.009            0.008</span>
 </span><span id="L-166"><a href="#L-166"><span class="linenos">166</span></a><span class="sd">    141   505            0.002            0.002</span>
 </span><span id="L-167"><a href="#L-167"><span class="linenos">167</span></a><span class="sd">    144   510            0.000            0.000</span>
 </span><span id="L-168"><a href="#L-168"><span class="linenos">168</span></a>
 </span><span id="L-169"><a href="#L-169"><span class="linenos">169</span></a><span class="sd">    &gt;&gt;&gt; calc2.binding_retained([484]).round(3)</span>
-</span><span id="L-170"><a href="#L-170"><span class="linenos">170</span></a><span class="sd">    0.793</span>
+</span><span id="L-170"><a href="#L-170"><span class="linenos">170</span></a><span class="sd">    0.788</span>
 </span><span id="L-171"><a href="#L-171"><span class="linenos">171</span></a>
 </span><span id="L-172"><a href="#L-172"><span class="linenos">172</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-173"><a href="#L-173"><span class="linenos">173</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -643,11 +643,11 @@ for instance BA.2:</p>
 </span><span id="EscapeCalculator-133"><a href="#EscapeCalculator-133"><span class="linenos">133</span></a><span class="sd">    &gt;&gt;&gt; sites_of_interest = [403, 440, 484, 498, 505, 510]</span>
 </span><span id="EscapeCalculator-134"><a href="#EscapeCalculator-134"><span class="linenos">134</span></a><span class="sd">    &gt;&gt;&gt; calc.escape_per_site([440, 505]).query(&quot;site in @sites_of_interest&quot;).round(3)</span>
 </span><span id="EscapeCalculator-135"><a href="#EscapeCalculator-135"><span class="linenos">135</span></a><span class="sd">         site  original_escape  retained_escape</span>
-</span><span id="EscapeCalculator-136"><a href="#EscapeCalculator-136"><span class="linenos">136</span></a><span class="sd">    69    403            0.095            0.028</span>
-</span><span id="EscapeCalculator-137"><a href="#EscapeCalculator-137"><span class="linenos">137</span></a><span class="sd">    101   440            0.151            0.017</span>
-</span><span id="EscapeCalculator-138"><a href="#EscapeCalculator-138"><span class="linenos">138</span></a><span class="sd">    143   484            0.045            0.035</span>
-</span><span id="EscapeCalculator-139"><a href="#EscapeCalculator-139"><span class="linenos">139</span></a><span class="sd">    156   498            0.157            0.071</span>
-</span><span id="EscapeCalculator-140"><a href="#EscapeCalculator-140"><span class="linenos">140</span></a><span class="sd">    163   505            0.188            0.020</span>
+</span><span id="EscapeCalculator-136"><a href="#EscapeCalculator-136"><span class="linenos">136</span></a><span class="sd">    69    403            0.105            0.030</span>
+</span><span id="EscapeCalculator-137"><a href="#EscapeCalculator-137"><span class="linenos">137</span></a><span class="sd">    101   440            0.162            0.018</span>
+</span><span id="EscapeCalculator-138"><a href="#EscapeCalculator-138"><span class="linenos">138</span></a><span class="sd">    143   484            0.043            0.032</span>
+</span><span id="EscapeCalculator-139"><a href="#EscapeCalculator-139"><span class="linenos">139</span></a><span class="sd">    156   498            0.169            0.076</span>
+</span><span id="EscapeCalculator-140"><a href="#EscapeCalculator-140"><span class="linenos">140</span></a><span class="sd">    163   505            0.208            0.022</span>
 </span><span id="EscapeCalculator-141"><a href="#EscapeCalculator-141"><span class="linenos">141</span></a><span class="sd">    167   510            0.001            0.001</span>
 </span><span id="EscapeCalculator-142"><a href="#EscapeCalculator-142"><span class="linenos">142</span></a>
 </span><span id="EscapeCalculator-143"><a href="#EscapeCalculator-143"><span class="linenos">143</span></a><span class="sd">    Calculate overall neutralization retained after no mutations or some mutations:</span>
@@ -655,7 +655,7 @@ for instance BA.2:</p>
 </span><span id="EscapeCalculator-145"><a href="#EscapeCalculator-145"><span class="linenos">145</span></a><span class="sd">    &gt;&gt;&gt; calc.binding_retained([])</span>
 </span><span id="EscapeCalculator-146"><a href="#EscapeCalculator-146"><span class="linenos">146</span></a><span class="sd">    1.0</span>
 </span><span id="EscapeCalculator-147"><a href="#EscapeCalculator-147"><span class="linenos">147</span></a><span class="sd">    &gt;&gt;&gt; calc.binding_retained([440, 505]).round(3)</span>
-</span><span id="EscapeCalculator-148"><a href="#EscapeCalculator-148"><span class="linenos">148</span></a><span class="sd">    0.591</span>
+</span><span id="EscapeCalculator-148"><a href="#EscapeCalculator-148"><span class="linenos">148</span></a><span class="sd">    0.545</span>
 </span><span id="EscapeCalculator-149"><a href="#EscapeCalculator-149"><span class="linenos">149</span></a>
 </span><span id="EscapeCalculator-150"><a href="#EscapeCalculator-150"><span class="linenos">150</span></a><span class="sd">    Now repeat tests with some non-default options:</span>
 </span><span id="EscapeCalculator-151"><a href="#EscapeCalculator-151"><span class="linenos">151</span></a>
@@ -672,13 +672,13 @@ for instance BA.2:</p>
 </span><span id="EscapeCalculator-162"><a href="#EscapeCalculator-162"><span class="linenos">162</span></a><span class="sd">         site  original_escape  retained_escape</span>
 </span><span id="EscapeCalculator-163"><a href="#EscapeCalculator-163"><span class="linenos">163</span></a><span class="sd">    62    403            0.006            0.006</span>
 </span><span id="EscapeCalculator-164"><a href="#EscapeCalculator-164"><span class="linenos">164</span></a><span class="sd">    84    440            0.008            0.007</span>
-</span><span id="EscapeCalculator-165"><a href="#EscapeCalculator-165"><span class="linenos">165</span></a><span class="sd">    123   484            0.207            0.029</span>
-</span><span id="EscapeCalculator-166"><a href="#EscapeCalculator-166"><span class="linenos">166</span></a><span class="sd">    134   498            0.008            0.008</span>
+</span><span id="EscapeCalculator-165"><a href="#EscapeCalculator-165"><span class="linenos">165</span></a><span class="sd">    123   484            0.212            0.029</span>
+</span><span id="EscapeCalculator-166"><a href="#EscapeCalculator-166"><span class="linenos">166</span></a><span class="sd">    134   498            0.009            0.008</span>
 </span><span id="EscapeCalculator-167"><a href="#EscapeCalculator-167"><span class="linenos">167</span></a><span class="sd">    141   505            0.002            0.002</span>
 </span><span id="EscapeCalculator-168"><a href="#EscapeCalculator-168"><span class="linenos">168</span></a><span class="sd">    144   510            0.000            0.000</span>
 </span><span id="EscapeCalculator-169"><a href="#EscapeCalculator-169"><span class="linenos">169</span></a>
 </span><span id="EscapeCalculator-170"><a href="#EscapeCalculator-170"><span class="linenos">170</span></a><span class="sd">    &gt;&gt;&gt; calc2.binding_retained([484]).round(3)</span>
-</span><span id="EscapeCalculator-171"><a href="#EscapeCalculator-171"><span class="linenos">171</span></a><span class="sd">    0.793</span>
+</span><span id="EscapeCalculator-171"><a href="#EscapeCalculator-171"><span class="linenos">171</span></a><span class="sd">    0.788</span>
 </span><span id="EscapeCalculator-172"><a href="#EscapeCalculator-172"><span class="linenos">172</span></a>
 </span><span id="EscapeCalculator-173"><a href="#EscapeCalculator-173"><span class="linenos">173</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="EscapeCalculator-174"><a href="#EscapeCalculator-174"><span class="linenos">174</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -990,11 +990,11 @@ If not <code>None</code>, override default <code>init_reweight</code> in <code>c
 <pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">sites_of_interest</span> <span class="o">=</span> <span class="p">[</span><span class="mi">403</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">484</span><span class="p">,</span> <span class="mi">498</span><span class="p">,</span> <span class="mi">505</span><span class="p">,</span> <span class="mi">510</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">calc</span><span class="o">.</span><span class="n">escape_per_site</span><span class="p">([</span><span class="mi">440</span><span class="p">,</span> <span class="mi">505</span><span class="p">])</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;site in @sites_of_interest&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">     site  original_escape  retained_escape</span>
-<span class="go">69    403            0.095            0.028</span>
-<span class="go">101   440            0.151            0.017</span>
-<span class="go">143   484            0.045            0.035</span>
-<span class="go">156   498            0.157            0.071</span>
-<span class="go">163   505            0.188            0.020</span>
+<span class="go">69    403            0.105            0.030</span>
+<span class="go">101   440            0.162            0.018</span>
+<span class="go">143   484            0.043            0.032</span>
+<span class="go">156   498            0.169            0.076</span>
+<span class="go">163   505            0.208            0.022</span>
 <span class="go">167   510            0.001            0.001</span>
 </code></pre>
 </div>
@@ -1005,7 +1005,7 @@ If not <code>None</code>, override default <code>init_reweight</code> in <code>c
 <pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">calc</span><span class="o">.</span><span class="n">binding_retained</span><span class="p">([])</span>
 <span class="go">1.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">calc</span><span class="o">.</span><span class="n">binding_retained</span><span class="p">([</span><span class="mi">440</span><span class="p">,</span> <span class="mi">505</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">0.591</span>
+<span class="go">0.545</span>
 </code></pre>
 </div>
 
@@ -1028,8 +1028,8 @@ If not <code>None</code>, override default <code>init_reweight</code> in <code>c
 <span class="go">     site  original_escape  retained_escape</span>
 <span class="go">62    403            0.006            0.006</span>
 <span class="go">84    440            0.008            0.007</span>
-<span class="go">123   484            0.207            0.029</span>
-<span class="go">134   498            0.008            0.008</span>
+<span class="go">123   484            0.212            0.029</span>
+<span class="go">134   498            0.009            0.008</span>
 <span class="go">141   505            0.002            0.002</span>
 <span class="go">144   510            0.000            0.000</span>
 </code></pre>
@@ -1037,7 +1037,7 @@ If not <code>None</code>, override default <code>init_reweight</code> in <code>c
 
 <div class="pdoc-code codehilite">
 <pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">calc2</span><span class="o">.</span><span class="n">binding_retained</span><span class="p">([</span><span class="mi">484</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">0.793</span>
+<span class="go">0.788</span>
 </code></pre>
 </div>
 </div>
