@@ -8,8 +8,10 @@ dependencies:
   - altair=5.0.0
   - biopython=1.81
   - git-lfs
+  - jupyter_contrib_nbextensions
   - jupyterlab
   - markdown=3.4.3
+  - matplotlib
   - nbstripout
   - openpyxl
   - pandas=2.0
@@ -17,8 +19,5 @@ dependencies:
   - python=3.10
   - python-markdown-math=0.8
   - snakemake=7.25
-  - vegafusion=1.2.4
-  - vegafusion-python-embed=1.2.4
-  - vegafusion-jupyter=1.2.4
   - vl-convert-python=0.9.0
   - xlrd
