@@ -1,14 +1,13 @@
 name: SARS2-RBD-escape-calc
 channels:
-  - bioconda
   - conda-forge
+  - bioconda
   - defaults
 
 dependencies:
   - altair=5.0.0
   - biopython=1.81
   - git-lfs
-  - jupyter_contrib_nbextensions
   - jupyterlab
   - markdown=3.4.3
   - matplotlib

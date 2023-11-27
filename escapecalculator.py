@@ -313,7 +313,6 @@ class EscapeCalculator:
         assert self.virus in set(self.data["virus"])
         self.data = self.data.query("virus == @self.virus").drop(columns="virus")
 
-        assert self.sources.issubset(self.data["source"])
         self.data = self.data.query("source in @self.sources").drop(columns="source")
 
         assert set(self.data.columns) == {"antibody", "site", "escape", "IC50", "reweight"}
