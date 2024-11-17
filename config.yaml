@@ -17,7 +17,7 @@ virus_min_antibodies_w_ic50: 1000
 # groupings. These are designed to account for the instance when
 # the antibodies isolated are not representative of their actual frequencies.
 antibody_reweighting:
-  repeated_2023:
+  repeated_2024:
     # these are the re-weightings used in https://doi.org/10.1101/2023.05.01.538516
     #  89% cross-reactive mAbs for BA.5/BF.7 BTI cohorts and 51% for reinfection
     # cohorts, as determined by unbiased characterization of mAbs using ELISA
@@ -47,7 +47,7 @@ init_study: any
 
 # options for study, matching name used in data to display name
 studies:
-  repeated_2023: Yisimayi et al, 2023, bioRxiv
+  repeated_2024: Yisimayi et al, 2024, Nature
   imprinted_2022: Cao et al, 2022, Nature
 
 # initial value of virus

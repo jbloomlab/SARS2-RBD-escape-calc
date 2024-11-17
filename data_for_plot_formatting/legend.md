@@ -22,7 +22,7 @@ Below the plots are a number of options:
  - Choose which study or studies to use antibodies from. Generally you will want to use antibodies from any study unless you have a good reason otherwise.
  - Adjust the mutation escape strength used by the calculator. Read [the paper](https://doi.org/10.1093/ve/veac021) for an explanation of this parameter, probably you do not need to adjust it.
  - Weight antibodies by the negative log IC50. Generally you want to use this option assuming you are interested in escape from antibody neutralization. Selecting no will instead show total binding rather than neutralization.
- - Re-weight antibodies from non-representative sources. This applies the re-weighting of antibodies from sources that is recommended by [Yisimayi et al (2023)](https://doi.org/10.1101/2023.05.01.538516), and you probably want to keep this option as *yes*.
+ - Re-weight antibodies from non-representative sources. This applies the re-weighting of antibodies from sources that is recommended by [Yisimayi et al, Nature, 625: 148-156 (2024)](https://www.nature.com/articles/s41586-023-06753-7), and you probably want to keep this option as *yes*.
 
 #### Citations and acknowledgements
 The calculator is maintained by [Jesse Bloom](https://twitter.com/jbloom_lab) and the citation for the calculator is:
@@ -32,7 +32,7 @@ The calculator is maintained by [Jesse Bloom](https://twitter.com/jbloom_lab) an
 The deep mutational scanning data used by the calculator comes from the following studies by the group of [Yunlong Cao](https://twitter.com/yunlong_cao/):
 
  - [Cao et al, Nature, 614:521-529 (2023)](https://www.nature.com/articles/s41586-022-05644-7)
- - [Yisimayi et al, bioRxiv, DOI 10.1101/2023.05.01.538516 (2023)](https://doi.org/10.1101/2023.05.01.538516)
+ - [Yisimayi et al, Nature, 625: 148-156 (2024)](https://www.nature.com/articles/s41586-023-06753-7)
 
 Special thanks to [Fanchong Jian](https://twitter.com/jianfcpku) (an author on the above papers from Yunlong Cao's group), who created the GitHub repos from which the deep mutational scanning data were extracted.
 
@@ -50,11 +50,11 @@ If you instead want to try to *predict* which sites are likely to change during 
 Currently the best data on those other properties are available at the following sites:
 
  - [https://jbloomlab.github.io/SARS-CoV-2-RBD_DMS_Omicron/RBD-heatmaps/](https://jbloomlab.github.io/SARS-CoV-2-RBD_DMS_Omicron/RBD-heatmaps/), which shows mutational effects on RBD ACE2 affinity and expression as measured by yeast-display deep mutational scanning in [Starr et al, PLoS Pathogens, 2022, 18:e1010951](https://doi.org/10.1371/journal.ppat.1010951)
- - [https://jbloomlab.github.io/SARS2-mut-fitness/S.html](https://jbloomlab.github.io/SARS2-mut-fitness/S.html), which shows the estimated fitness effects of mutations to the spike as estimated in [Bloom & Neher, bioRxiv, 2023, DOI 10.1101/2023.01.30.526314](https://doi.org/10.1101/2023.01.30.526314)
+ - [https://jbloomlab.github.io/SARS2-mut-fitness/S.html](https://jbloomlab.github.io/SARS2-mut-fitness/S.html), which shows the estimated fitness effects of mutations to the spike as estimated in [Bloom & Neher, Virus Evolution, veae026 (2023)](https://academic.oup.com/ve/article/9/2/vead055/7265011)
 
 In addition, the amino-acid mutations that occur in natural viral evolution are predominantly ones accessible by single nucleotide mutations, especially via the [more common types of nucleotide changes](https://doi.org/10.1093/molbev/msad085).
 
-Note that the papers by Yunlong Cao's group already integrate these different types of data to make forecasts of likely future mutations, as for instance in [Yisimayi et al, bioRxiv, DOI 10.1101/2023.05.01.538516 (2023)](https://doi.org/10.1101/2023.05.01.538516).
+Note that the papers by Yunlong Cao's group already integrate these different types of data to make forecasts of likely future mutations, as for instance in [Yisimayi et al, Nature, 625: 148-156 (2024)](https://www.nature.com/articles/s41586-023-06753-7).
 
 ### Detailed explanation of how the calculator works
 For each antibody $a$, let $x_{a,r}$ be the measurement of how much mutating site $r$ escapes the antibody.
