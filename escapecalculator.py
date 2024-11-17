@@ -22,14 +22,12 @@ To use the calculator, open a Python session, import this module, and initialize
 
 With no mutations, there is no escape (all neutralization retained):
 
->>> calc.binding_retained([])
-1.0
+>>> assert calc.binding_retained([]) == 1.0
 
 But if you mutate some key antigenic sites, there will be a dramatic reduction in
 neutralization retained:
 
->>> calc.binding_retained([440, 505]).round(3)
-0.545
+>>> assert calc.binding_retained([440, 505]).round(3) == 0.545
 
 If you have a whole set of sequences and have tabulated which sites are mutated,
 you can apply the calculator in bulk to the data frame.
@@ -64,8 +62,7 @@ for instance BA.2:
 
 Now the escape will be different because different antibodies neutralize that virus:
 
->>> calc_ba2.binding_retained([440, 505]).round(3)
-0.786
+>>> assert calc_ba2.binding_retained([440, 505]).round(3) == 0.786
 
 """
 
@@ -97,8 +94,6 @@ class EscapeCalculator:
         Path or URL of CSV containing the escape data.
     antibody_ic50s : str
         Path or URL of CSV containing the antibody IC50s.
-    antibody_binding : str
-        Path or URL of CSV containing the antibody binding.
     antibody_sources : str
         Path or URL of CSV containing the antibody sources.
     antibody_reweighting : str
@@ -111,8 +106,6 @@ class EscapeCalculator:
         If not `None`, override default `init_weight_by_neg_log_IC50` in `config`.
     study : None or str
         If not `None`, override default `init_study` in `config`.
-    binds : None or str
-        If not `None`, override default `init_binds` in `config`.
     virus : None or str
         If not `None`, override default `init_virus` in `config`.
     sources : None or dict
@@ -141,10 +134,8 @@ class EscapeCalculator:
 
     Calculate overall neutralization retained after no mutations or some mutations:
 
-    >>> calc.binding_retained([])
-    1.0
-    >>> calc.binding_retained([440, 505]).round(3)
-    0.545
+    >>> assert calc.binding_retained([]) == 1.0
+    >>> assert calc.binding_retained([440, 505]).round(3) == 0.545
 
     Now repeat tests with some non-default options:
 
@@ -152,7 +143,6 @@ class EscapeCalculator:
     ...     mut_escape_strength=1,
     ...     weight_by_neg_log_ic50=False,
     ...     study="Cao et al, 2022, Nature",
-    ...     binds="Wuhan-Hu-1",
     ...     virus="D614G",
     ...     sources={"include_exclude": "include", "sources": ["WT convalescents"]},
     ... )
@@ -166,14 +156,12 @@ class EscapeCalculator:
     141   505            0.002            0.002
     144   510            0.000            0.000
 
-    >>> calc2.binding_retained([484]).round(3)
-    0.788
+    >>> assert calc2.binding_retained([484]).round(3) == 0.788
 
     """
     def __init__(self,
         escape="https://raw.githubusercontent.com/jbloomlab/SARS2-RBD-escape-calc/main/results/escape.csv",
         antibody_ic50s="https://raw.githubusercontent.com/jbloomlab/SARS2-RBD-escape-calc/main/results/antibody_IC50s.csv",
-        antibody_binding="https://raw.githubusercontent.com/jbloomlab/SARS2-RBD-escape-calc/main/results/antibody_binding.csv",
         antibody_sources="https://raw.githubusercontent.com/jbloomlab/SARS2-RBD-escape-calc/main/results/antibody_sources.csv",
         antibody_reweighting="https://raw.githubusercontent.com/jbloomlab/SARS2-RBD-escape-calc/main/results/antibody_reweighting.csv",
         config="https://raw.githubusercontent.com/jbloomlab/SARS2-RBD-escape-calc/main/config.yaml",
@@ -181,7 +169,6 @@ class EscapeCalculator:
         mut_escape_strength=None,
         weight_by_neg_log_ic50=None,
         study=None,
-        binds=None,
         virus=None,
         sources=None,
         reweight=None,
@@ -203,14 +190,6 @@ class EscapeCalculator:
         assert self.antibody_ic50s["IC50"].max() == 10
         assert antibodies == set(self.antibody_ic50s["antibody"])
 
-        self.antibody_binding = pd.read_csv(antibody_binding)
-        assert set(self.antibody_binding.columns) == {"antibody", "binds"}
-        assert (
-            len(self.antibody_binding)
-            == len(self.antibody_binding.groupby(["antibody", "binds"]))
-        )
-        assert antibodies == set(self.antibody_binding["antibody"])
-
         self.antibody_sources = pd.read_csv(antibody_sources)
         assert set(self.antibody_sources.columns) == {"antibody", "source", "study"}
         assert (
@@ -227,7 +206,6 @@ class EscapeCalculator:
         self.data = (
             self.escape
             .merge(self.antibody_ic50s, on="antibody")
-            .merge(self.antibody_binding, on="antibody")
             .merge(self.antibody_sources, on="antibody")
             .merge(self.antibody_reweighting, on="antibody", how="left")
             .assign(reweight=lambda x: x["reweight"].fillna(1))
@@ -268,11 +246,6 @@ class EscapeCalculator:
             else:
                 raise ValueError(f"invalid {study=}")
 
-        if binds is None:
-            self.binds = config["init_binds"]
-        else:
-            self.binds = binds
-
         if virus is None:
             self.virus = config["init_virus"]
         else:
@@ -303,12 +276,6 @@ class EscapeCalculator:
             self.data = self.data.query("study == @self.study").drop(columns="study")
         else:
             self.data = self.data.drop(columns="study")
-
-        if self.binds != "any":
-            assert self.binds in set(self.data["binds"])
-            self.data = self.data.query("binds == @self.binds").drop(columns="binds")
-        else:
-            self.data = self.data.drop(columns="binds").drop_duplicates()
 
         assert self.virus in set(self.data["virus"])
         self.data = self.data.query("virus == @self.virus").drop(columns="virus")

@@ -20,7 +20,6 @@ Below the plots are a number of options:
 
  - Choose the virus against which neutralization is measured. This is an important option--results can look quite different depending on this choice as different antibodies neutralize different viruses.
  - Choose which study or studies to use antibodies from. Generally you will want to use antibodies from any study unless you have a good reason otherwise.
- - Use only antibodies known to bind a specific RBD. For most analyses, you can keep this option as any, as only antibodies that neutralize the virus will be shown anyway assuming escape is weighted by IC50.
  - Adjust the mutation escape strength used by the calculator. Read [the paper](https://doi.org/10.1093/ve/veac021) for an explanation of this parameter, probably you do not need to adjust it.
  - Weight antibodies by the negative log IC50. Generally you want to use this option assuming you are interested in escape from antibody neutralization. Selecting no will instead show total binding rather than neutralization.
  - Re-weight antibodies from non-representative sources. This applies the re-weighting of antibodies from sources that is recommended by [Yisimayi et al (2023)](https://doi.org/10.1101/2023.05.01.538516), and you probably want to keep this option as *yes*.
