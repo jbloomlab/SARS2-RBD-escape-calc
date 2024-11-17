@@ -1,8 +1,18 @@
 .*
 !.gitignore
+!.gitattributes
 !.gitmodules
 
 _*
 *.out
+
+Cao_data/JN1-evolving-antibody-response/*
+!Cao_data/JN1-evolving-antibody-response/data
+Cao_data/JN1-evolving-antibody-response/data/*
+!Cao_data/JN1-evolving-antibody-response/data/DMS
+Cao_data/JN1-evolving-antibody-response/data/DMS/*
+!Cao_data/JN1-evolving-antibody-response/data/DMS/antibody
+Cao_data/JN1-evolving-antibody-response/data/DMS/antibody/*
+!Cao_data/JN1-evolving-antibody-response/data/DMS/antibody/dms_antibodies_XBB15_JN1_agg.csv
 
 results/*.html
