@@ -9,6 +9,9 @@ filter_antibodies:
   sig_escape_threshold: 0.1
   max_sig_sites: 40
 
+# To limit plot size, drop escape values less than this after normalizing to one
+drop_escape_below: 0.02
+
 # When processing data, only keep viruses with IC50s measured against at
 # least this many antibodies
 virus_min_antibodies_w_ic50: 1000
@@ -47,6 +50,7 @@ init_study: any
 
 # options for study, matching name used in data to display name
 studies:
+  evolving_2024: Jian et al, 2024, Nature
   repeated_2024: Yisimayi et al, 2024, Nature
   imprinted_2022: Cao et al, 2022, Nature
 
