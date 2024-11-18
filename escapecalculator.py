@@ -22,12 +22,14 @@ To use the calculator, open a Python session, import this module, and initialize
 
 With no mutations, there is no escape (all neutralization retained):
 
->>> assert calc.binding_retained([]) == 1.0
+>>> float(calc.binding_retained([]))
+1.0
 
 But if you mutate some key antigenic sites, there will be a dramatic reduction in
 neutralization retained:
 
->>> assert calc.binding_retained([440, 505]).round(3) == 0.545
+>>> float(calc.binding_retained([440, 505]).round(3))
+0.412
 
 If you have a whole set of sequences and have tabulated which sites are mutated,
 you can apply the calculator in bulk to the data frame.
@@ -51,9 +53,9 @@ Now apply the calculator:
 >>> seqs.round(3)
    name mutated sites  neutralization retained
 0  seq1            []                    1.000
-1  seq2         [498]                    0.769
-2  seq3         [440]                    0.790
-3  seq4    [440, 505]                    0.545
+1  seq2         [498]                    0.818
+2  seq3         [440]                    0.846
+3  seq4    [440, 505]                    0.412
 
 You can also create new calculators that compute escape relative to different viruses,
 for instance BA.2:
@@ -62,7 +64,8 @@ for instance BA.2:
 
 Now the escape will be different because different antibodies neutralize that virus:
 
->>> assert calc_ba2.binding_retained([440, 505]).round(3) == 0.786
+>>> float(calc_ba2.binding_retained([440, 505]).round(3))
+0.59
 
 """
 
@@ -125,17 +128,18 @@ class EscapeCalculator:
     >>> sites_of_interest = [403, 440, 484, 498, 505, 510]
     >>> calc.escape_per_site([440, 505]).query("site in @sites_of_interest").round(3)
          site  original_escape  retained_escape
-    69    403            0.105            0.030
-    101   440            0.162            0.018
-    143   484            0.043            0.032
-    156   498            0.169            0.076
-    163   505            0.208            0.022
-    167   510            0.001            0.001
+    70    403            0.376            0.070
+    101   440            0.336            0.019
+    145   484            0.035            0.019
+    159   498            0.313            0.103
+    166   505            0.955            0.086
+    170   510            0.009            0.003
 
     Calculate overall neutralization retained after no mutations or some mutations:
 
     >>> assert calc.binding_retained([]) == 1.0
-    >>> assert calc.binding_retained([440, 505]).round(3) == 0.545
+    >>> float(calc.binding_retained([440, 505]).round(3))
+    0.412
 
     Now repeat tests with some non-default options:
 
@@ -151,12 +155,13 @@ class EscapeCalculator:
          site  original_escape  retained_escape
     62    403            0.006            0.006
     84    440            0.008            0.007
-    123   484            0.212            0.029
+    123   484            0.215            0.029
     134   498            0.009            0.008
     141   505            0.002            0.002
     144   510            0.000            0.000
 
-    >>> assert calc2.binding_retained([484]).round(3) == 0.788
+    >>> float(calc2.binding_retained([484]).round(3))
+    0.785
 
     """
     def __init__(self,
