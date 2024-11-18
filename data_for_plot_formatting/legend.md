@@ -33,6 +33,7 @@ The deep mutational scanning data used by the calculator comes from the followin
 
  - [Cao et al, Nature, 614:521-529 (2023)](https://www.nature.com/articles/s41586-022-05644-7)
  - [Yisimayi et al, Nature, 625: 148-156 (2024)](https://www.nature.com/articles/s41586-023-06753-7)
+ - [Jian et al, Nature (2024)](https://www.nature.com/articles/s41586-024-08315-x)
 
 Special thanks to [Fanchong Jian](https://twitter.com/jianfcpku) (an author on the above papers from Yunlong Cao's group), who created the GitHub repos from which the deep mutational scanning data were extracted.
 
