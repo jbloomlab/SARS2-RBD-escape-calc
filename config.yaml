@@ -55,7 +55,7 @@ studies:
   imprinted_2022: Cao et al, 2022, Nature
 
 # initial value of virus
-init_virus: XBB
+init_virus: KP.3
 
 # initial value of antibody sources
 init_sources:
