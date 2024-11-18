@@ -9,7 +9,11 @@ There is also a Python module for command-line implementation of the calculator,
 
 ## Contents of this repo
 
-- [./Cao_data/](Cao_data): the input data used by calculator, in the form of submodules of the GitHub repos from their papers. Also the spreadsheet [Cao_data/all-repo-duplicates.xlsx](Cao_data/all-repo-duplicates.xlsx) which defines some antibodies that are duplicated across repos with different names according to an analysis done by Jennifer Macke at LANL.
+- [./Cao_data/](Cao_data): the input data used by calculator, from papers by Yunlong Cao:
+  - [./Cao_data/JN1-evolving-antibody-response](Cao_data/JN1-evolving-antibody-response): the unzipped archive available from [https://zenodo.org/records/13893217](https://zenodo.org/records/13893217), which is the data for [Jian et al (2024)](https://www.nature.com/articles/s41586-024-08315-x)
+  - [./Cao_data/convergent_RBD_evolution](Cao_data/convergent_RBD_evolution): submodule of [https://github.com/jianfcpku/convergent_RBD_evolution](https://github.com/jianfcpku/convergent_RBD_evolution)
+  - [./Cao_data/SARS-CoV-2-reinfection-DMS](Cao_data/SARS-CoV-2-reinfection-DMS): submodule of [https://github.com/jianfcpku/SARS-CoV-2-reinfection-DMS](https://github.com/jianfcpku/SARS-CoV-2-reinfection-DMS)
+  - [Cao_data/all-repo-duplicates.xlsx](Cao_data/all-repo-duplicates.xlsx) which defines some antibodies that are duplicated across repos with different names according to an analysis done by Jennifer Macke at LANL.
 
 - [config.yaml](config.yaml): configuration for processing the data and creating the calculator.
 
