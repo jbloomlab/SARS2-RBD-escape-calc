@@ -62,6 +62,7 @@ init_sources:
   include_exclude: exclude  # does `sources` list sources to include or exclude?
   sources:
     - SARS convalescents
+    - SARS exposure
 
 # re-weight antibodies from non-representative sources?
 init_reweight: true

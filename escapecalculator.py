@@ -29,7 +29,7 @@ But if you mutate some key antigenic sites, there will be a dramatic reduction i
 neutralization retained:
 
 >>> float(calc.binding_retained([440, 505]).round(3))
-0.412
+0.408
 
 If you have a whole set of sequences and have tabulated which sites are mutated,
 you can apply the calculator in bulk to the data frame.
@@ -53,9 +53,9 @@ Now apply the calculator:
 >>> seqs.round(3)
    name mutated sites  neutralization retained
 0  seq1            []                    1.000
-1  seq2         [498]                    0.818
-2  seq3         [440]                    0.846
-3  seq4    [440, 505]                    0.412
+1  seq2         [498]                    0.817
+2  seq3         [440]                    0.844
+3  seq4    [440, 505]                    0.408
 
 You can also create new calculators that compute escape relative to different viruses,
 for instance BA.2:
@@ -128,18 +128,18 @@ class EscapeCalculator:
     >>> sites_of_interest = [403, 440, 484, 498, 505, 510]
     >>> calc.escape_per_site([440, 505]).query("site in @sites_of_interest").round(3)
          site  original_escape  retained_escape
-    70    403            0.376            0.070
-    101   440            0.336            0.019
+    70    403            0.377            0.069
+    101   440            0.337            0.019
     145   484            0.035            0.019
-    159   498            0.313            0.103
-    166   505            0.955            0.086
+    159   498            0.314            0.103
+    166   505            0.957            0.086
     170   510            0.009            0.003
 
     Calculate overall neutralization retained after no mutations or some mutations:
 
     >>> assert calc.binding_retained([]) == 1.0
     >>> float(calc.binding_retained([440, 505]).round(3))
-    0.412
+    0.408
 
     Now repeat tests with some non-default options:
 
